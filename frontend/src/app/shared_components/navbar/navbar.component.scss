@@ -1,0 +1,71 @@
+:host {
+  position: sticky;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 10;
+  .navbar {
+    max-height: 10vh;
+    display: flex;
+    flex-direction: row;
+    min-width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    background-color: white;
+
+    &__left {
+      display: flex;
+      flex-direction: row;
+      gap: 0.5rem;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    &__middle {
+      cursor: pointer;
+      border-radius: 0.2rem;
+      padding: 0.2rem 0.78rem;
+
+      & span {
+        color: #f48225;
+      }
+      & a {
+        color: black;
+        text-decoration: none;
+        font-size: 1.5rem;
+        // font-weight: bold;
+      }
+
+      &:hover {
+        background-color: rgb(221, 221, 221);
+      }
+    }
+
+    &__right {
+      & button {
+        border: none;
+        background-color: #f48225;
+        color: white;
+        padding: 0.3rem 0.88rem;
+        border-radius: 0.2rem;
+        font-size: 1rem;
+        border: transparent 2px solid;
+        cursor: pointer;
+
+        &:hover {
+          background-color: white;
+          color: #f48225;
+          border: #f48225 2px solid;
+        }
+      }
+    }
+  }
+}
+
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 600, "GRAD", "opsz" 48;
+  color: #f48225;
+}
