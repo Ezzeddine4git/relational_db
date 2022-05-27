@@ -1,3 +1,109 @@
-* {
-  background-color: red;
+:host {
+  display: flex;
+  justify-content: flex-star;
+  align-items: flex-start;
+  min-height: 100vh;
+  background-color: white;
+  padding-top: 4rem;
+  padding-left: 22vw;
+  padding-right: 7vh;
+  padding-bottom: 5rem;
+
+  .home {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .home__users {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3rem;
+
+    &__user {
+      display: flex;
+      flex-direction: column;
+      border-radius: 0.3rem;
+      width: 16rem;
+      cursor: pointer;
+      transition: transform 150ms ease-out;
+
+      &:hover {
+        transform: scale(1.1);
+      }
+
+      &__head {
+        position: relative;
+        flex: 1;
+        background-color: black;
+
+        & img {
+          width: 100%;
+          height: 100%;
+          border-radius: 0.3rem 0.3rem 0 0;
+          filter: blur(1px);
+          -webkit-filter: blur(1px);
+          opacity: 0.55;
+        }
+
+        & h4 {
+          color: white;
+          position: absolute;
+          bottom: 0.2rem;
+          padding: 0.22rem;
+          font-size: 1.2rem;
+          padding-left: 1rem;
+        }
+      }
+
+      &__bottom {
+        background-color: black;
+        padding: 1rem 0.2rem;
+        background-color: white;
+        box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
+          rgba(0, 0, 0, 0.23) 0px 6px 6px;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        cursor: pointer;
+        background-color: rgb(233, 233, 233);
+
+        & .btn {
+          margin: 0 0.2rem;
+          flex-grow: 1;
+          border: none;
+          padding: 0.3rem 0;
+          background-color: #f48225;
+          color: white;
+          border-radius: 0.2rem;
+          cursor: pointer;
+          border: 2px solid #f48225;
+          transition: all 150ms ease-out;
+          font-size: 1rem;
+          &:hover {
+            color: #f48225;
+            background-color: rgb(233, 233, 233);
+          }
+        }
+
+        & .secondary {
+          background-color: rgb(172, 169, 169);
+          border: 2px solid rgb(172, 169, 169);
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 705px) {
+  :host {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  .home__users {
+    justify-content: center;
+    align-items: center;
+  }
+  .home__users__user {
+    min-width: 80vw;
+  }
 }
