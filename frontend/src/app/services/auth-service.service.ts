@@ -58,6 +58,7 @@ export class AuthServiceService {
         })
         .subscribe(
           (data) => {
+            console.log(data);
             this.login(email, password);
           },
           (error: HttpErrorResponse) => {
@@ -85,5 +86,16 @@ export class AuthServiceService {
     return false;
   }
 
-  logout() {}
+  logout() {
+    this.http.post<any>(`${environment.apiUrl}/logout`, null).subscribe(
+      (response) => {
+        localStorage.removeItem('user');
+        localStorage.removeItem('access_token');
+        this.router.navigate(['/login']);
+      },
+      (error: HttpErrorResponse) => {
+        throwError(error.message);
+      }
+    );
+  }
 }
