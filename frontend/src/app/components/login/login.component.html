@@ -3,16 +3,26 @@
     <div class="login__header">
       <h2>Login:</h2>
     </div>
+    <div *ngIf="statusCode && statusCode === 401" class="error">
+      <p>Please verify your Infos.</p>
+    </div>
     <div class="login__body">
-      <form class="login__body__from">
+      <form
+        #loginForm="ngForm"
+        class="login__body__from"
+        (submit)="login(loginForm)"
+      >
         <div class="login__body__form__fields">
           <div class="login__body__form__fields__input">
-            <!-- <label for="email"> E-mail: </label> -->
-            <input type="text" name="email" placeholder="E-mail" />
+            <input type="text" name="email" placeholder="E-mail" ngModel />
           </div>
           <div class="login__body__form__fields__input">
-            <!-- <label for="email"> Password: </label> -->
-            <input type="password" name="password" placeholder="Password" />
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              ngModel
+            />
           </div>
         </div>
         <div class="login__body__from__bottom">

@@ -3,27 +3,36 @@
     <div class="register__header">
       <h2>Register:</h2>
     </div>
+    <div *ngIf="statusCode" class="error">
+      <p>Error</p>
+    </div>
     <div class="register__body">
-      <form class="register__body__from">
+      <form
+        #registerForm="ngForm"
+        class="register__body__from"
+        (submit)="register(registerForm)"
+      >
         <div class="register__body__form__fields">
           <div class="register__body__form__fields__input">
-            <input type="text" name="email" placeholder="E-mail" />
+            <input type="text" name="email" placeholder="E-mail" ngModel />
           </div>
           <div class="register__body__form__fields__input">
-            <input type="text" name="name" placeholder="Name" />
-          </div>
-          <div class="register__body__form__fields__input">
-            <input
-              type="password"
-              name="password_confirmation"
-              placeholder="Password"
-            />
+            <input type="text" name="name" placeholder="Name" ngModel />
           </div>
           <div class="register__body__form__fields__input">
             <input
               type="password"
               name="password"
+              placeholder="Password"
+              ngModel
+            />
+          </div>
+          <div class="register__body__form__fields__input">
+            <input
+              type="password"
+              name="password_confirmation"
               placeholder="Confirm Password"
+              ngModel
             />
           </div>
         </div>
