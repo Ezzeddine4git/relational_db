@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthServiceService } from 'src/app/services/auth-service.service';
 @Component({
   selector: 'app-login',
@@ -8,7 +9,7 @@ import { AuthServiceService } from 'src/app/services/auth-service.service';
 })
 export class LoginComponent implements OnInit {
   public statusCode: any;
-  constructor(public authService: AuthServiceService) {}
+  constructor(public authService: AuthServiceService, public router: Router) {}
 
   ngOnInit(): void {}
 

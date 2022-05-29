@@ -21,7 +21,5 @@ export class RegisterComponent implements OnInit {
       registerForm.value.password,
       registerForm.value.password_confirmation
     );
-
-    console.log(registerForm.value);
   }
 }

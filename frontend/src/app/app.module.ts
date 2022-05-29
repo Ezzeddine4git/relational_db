@@ -12,6 +12,7 @@ import { NavbarComponent } from './shared_components/navbar/navbar.component';
 import { SideBarComponent } from './shared_components/side-bar/side-bar.component';
 import { AuthServiceService } from './services/auth-service.service';
 import { TokenInterceptor } from './interceptors/token.interceptor';
+import { ErrorInterceptor } from './interceptors/error.interceptor';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,11 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
       multi: true,
     },
   ],

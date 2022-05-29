@@ -91,7 +91,7 @@ export class AuthServiceService {
       (response) => {
         localStorage.removeItem('user');
         localStorage.removeItem('access_token');
-        this.router.navigate(['/login']);
+        this.router.navigate(['/']);
       },
       (error: HttpErrorResponse) => {
         throwError(error.message);
