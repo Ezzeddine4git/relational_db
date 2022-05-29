@@ -22,6 +22,8 @@ class User extends Authenticatable implements JWTSubject
         'name',
         'email',
         'password',
+        'profile_picture',
+        'cover_picture'
     ];
 
     /**
@@ -54,4 +56,12 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims() {
         return [];
     }    
+
+    public function friends() {
+        return $this->belongsToMany(User::class, 'users_network', 'user1_id', 'user2_id')->withTimestamps();
+    }
+
+    public function friended() {
+        return $this->belongsToMany(User::class, 'users_network', 'user2_id', 'user1_id')->withTimestamps();
+    }
 }

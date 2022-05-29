@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -27,4 +28,13 @@ Route::group([
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/refresh', [AuthController::class, 'refresh']);
     Route::get('/user-profile', [AuthController::class, 'userProfile']);    
+});
+
+Route::group([
+    'middleware' => 'api',
+    'middleware' => 'auth',
+], function () {
+    Route::get('/users', [UserController::class, 'index']);
+    Route::get('/users/add/{user}', [UserController::class, 'add_friend']);
+    Route::get('/users/list/{user}', [UserController::class, 'friends_list']);
 });

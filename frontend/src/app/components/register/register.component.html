@@ -35,6 +35,27 @@
               ngModel
             />
           </div>
+          <div class="register__body__form__fields__input">
+            <label>Profile picture:</label>
+            <input
+              name="profile_picture"
+              (change)="handleFileInput($event)"
+              type="file"
+              accept="image/*"
+              ngModel
+            />
+          </div>
+          <div class="register__body__form__fields__input">
+            <label>Cover picture:</label>
+            <input
+              name="cover_picture"
+              type="file"
+              accept="image/*"
+              ngModel
+              placeholder="Cover"
+              (change)="handleFileInput($event)"
+            />
+          </div>
         </div>
         <div class="register__body__from__bottom">
           <Button class="btn">Register</Button>

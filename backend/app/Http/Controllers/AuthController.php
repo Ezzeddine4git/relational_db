@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Validator;
 
+use function PHPUnit\Framework\isNull;
+
 class AuthController extends Controller
 {
     /**
@@ -43,7 +45,12 @@ class AuthController extends Controller
             'name' => 'required|string|between:2,100',
             'email' => 'required|string|email|max:100|unique:users',
             'password' => 'required|string|confirmed|min:6',
+            'profile_picture' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'cover_picture' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
+
+        
+
         if($validator->fails()){
             return response()->json(
                 ["error" => $validator->errors()->toJson()]
@@ -52,7 +59,27 @@ class AuthController extends Controller
         $user = User::create(array_merge(
                     $validator->validated(),
                     ['password' => bcrypt($request->password)]
-                ));
+        ));
+
+        if($request->hasFile('profile_picture')) {
+            $profile_picture = "profile_picture_" .$user->id."_".$request->file('profile_picture')->getClientOriginalName();
+            $request->file('profile_picture')->move(public_path('images'), $profile_picture);
+        } else {
+            $profile_picture = 'https://avatars.dicebear.com/api/human/' .$request->name. '.svg';
+        }
+
+        if($request->hasFile('cover_picture')) {
+            $cover_picture = "cover_picture_" .$user->id."_".$request->file('cover_picture')->getClientOriginalName();
+            $request->file('cover_picture')->move(public_path('images'), $cover_picture);
+        } else {
+            $cover_picture = "https://source.unsplash.com/random/";
+        }
+
+        $user->profile_picture = $profile_picture;
+        $user->cover_picture = $cover_picture;
+        $user->save();
+
+        
         return response()->json([
             'message' => 'User successfully registered',
             'user' => $user

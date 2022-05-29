@@ -44,28 +44,40 @@ export class AuthServiceService {
     email: string,
     name: string,
     password: string,
-    password_confirmation: string
+    password_confirmation: string,
+    profile_picture: File | null,
+    cover_picture: File | null
   ) {
     var statusCode: any;
+    const formData = new FormData();
 
+    if (cover_picture) {
+      formData.append('cover_picture', cover_picture);
+
+      const upload$ = this.http.post('/api/thumbnail-upload', formData);
+    }
+
+    if (profile_picture) {
+      formData.append('profile_picture', profile_picture);
+
+      const upload$ = this.http.post('/api/thumbnail-upload', formData);
+    }
+
+    formData.append('email', email);
+    formData.append('password', password);
+    formData.append('password_confirmation', password_confirmation);
+    formData.append('name', name);
     const promise = new Promise((resolve) => {
-      this.http
-        .post<any>(`${environment.apiUrl}/register`, {
-          email: email,
-          password: password,
-          password_confirmation: password_confirmation,
-          name: name,
-        })
-        .subscribe(
-          (data) => {
-            console.log(data);
-            this.login(email, password);
-          },
-          (error: HttpErrorResponse) => {
-            resolve(error.status);
-            throwError(error.error.message);
-          }
-        );
+      this.http.post<any>(`${environment.apiUrl}/register`, formData).subscribe(
+        (data) => {
+          console.log(data);
+          this.login(email, password);
+        },
+        (error: HttpErrorResponse) => {
+          resolve(error.status);
+          throwError(error.error.message);
+        }
+      );
     });
 
     await promise.then((response) => {

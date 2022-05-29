@@ -22,6 +22,14 @@
 
       & form {
         width: 100%;
+        .register__body__form__fields__input {
+          display: flex;
+          gap: 1rem;
+          width: 100%;
+          & label {
+            font-size: 0.9rem;
+          }
+        }
       }
 
       &__body {
@@ -90,7 +98,7 @@
 
             & input {
               padding: 0.6rem 0.5rem;
-              min-width: 100%;
+              width: 100%;
               border: 0.12rem solid lightgray;
               border-radius: 0.2rem;
               outline: none;
